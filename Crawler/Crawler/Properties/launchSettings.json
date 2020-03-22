@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "Crawler": {
+      "commandName": "Project",
+      "commandLineArgs": "check-lyrics -v 1 -p C:\\Users\\thomas.perrais\\Documents\\Projects\\Songs\\lyrics -t C:\\Users\\thomas.perrais\\Documents\\Projects\\Songs\\titles -o C:\\Users\\thomas.perrais\\Documents\\Projects\\Songs\\lyrics-report.txt"
+    }
+  }
+}
