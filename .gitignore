@@ -127,3 +127,40 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+
+##### Visual Studio
+
+build/
+packages/
+bin/
+obj/
+
+# visual studio files
+.vs/
+*.sln.ide/
+*.user
+*.suo
+
+# performance diagnostic files
+*.vspx
+*.vsps
+*.diagsession
+
+# ressources
+*.tar.bz2
+*.dll
+*.pdb
+*.zip
+
+# sublime files
+*.sublime-project
+*.sublime-workspace
+
+*.lnk
+*.bak
+*.rar
+*.nupkg
+
+
+
+
