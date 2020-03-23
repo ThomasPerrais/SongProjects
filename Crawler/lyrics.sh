@@ -4,6 +4,9 @@
 # Defining letter: e.g: a;b;c;0_9
 letters=$1
 
+# Defining timeout
+timeout=10000
+
 # Defining base folder of the project
 folder=$USERPROFILE/Documents/Projects/Songs
 
@@ -20,6 +23,13 @@ echo build Crawler solution
 dotnet build -c Release
 
 echo extracting lyrics
-dotnet Crawler/bin/Release/netcoreapp3.1/Crawler.dll lyrics -v 1 -p $proxy -l $letters -o $output -i $input
+if [[ $letters = "" ]]
+then
+    dotnet Crawler/bin/Release/netcoreapp3.1/Crawler.dll lyrics -v 1 -p $proxy -o $output -i $input -t $timeout
+else
+    dotnet Crawler/bin/Release/netcoreapp3.1/Crawler.dll lyrics -v 1 -p $proxy -l $letters -o $output -i $input -t $timeout
+fi
+
+
 
 read -p "All done... Press [ENTER]."

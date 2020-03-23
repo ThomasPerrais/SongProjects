@@ -17,7 +17,7 @@ lyrics=$folder/lyrics
 echo build Crawler solution
 dotnet build -c Release
 
-echo creating lyrics report (number of lyrics extracted / total number in csvs - per starting letter)
+echo "creating lyrics report (number of lyrics extracted / total number in csvs - per starting letter)"
 dotnet Crawler/bin/Release/netcoreapp3.1/Crawler.dll check-lyrics -v 1 -p $lyrics -t $titles -o $outputFilename
 
 read -p "All done... Press [ENTER]."

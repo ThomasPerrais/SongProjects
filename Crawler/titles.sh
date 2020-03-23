@@ -17,6 +17,10 @@ echo build Crawler solution
 dotnet build -c Release
 
 echo extracting titles
-dotnet Crawler/bin/Release/netcoreapp3.1/Crawler.dll titles -v 1 -p $proxy -l $letters -f $output -t 10000
-
+if [[ $letters = "" ]]
+then
+	dotnet Crawler/bin/Release/netcoreapp3.1/Crawler.dll titles -v 1 -p $proxy -f $output -t 10000
+else
+	dotnet Crawler/bin/Release/netcoreapp3.1/Crawler.dll titles -v 1 -p $proxy -l $letters -f $output -t 10000
+fi
 read -p "All done... Press [ENTER]."

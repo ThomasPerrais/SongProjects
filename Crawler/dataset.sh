@@ -20,6 +20,11 @@ echo build Crawler solution
 dotnet build -c Release
 
 echo creating dataset
-dotnet Crawler/bin/Release/netcoreapp3.1/Crawler.dll dataset -v 1 -l $letters -o $output -p $lyrics -t $titles
+if [[ $letters = "" ]]
+then
+	dotnet Crawler/bin/Release/netcoreapp3.1/Crawler.dll dataset -v 1 -o $output -p $lyrics -t $titles
+else
+	dotnet Crawler/bin/Release/netcoreapp3.1/Crawler.dll dataset -v 1 -l $letters -o $output -p $lyrics -t $titles
+fi
 
 read -p "All done... Press [ENTER]."

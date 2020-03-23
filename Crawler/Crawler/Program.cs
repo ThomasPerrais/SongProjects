@@ -40,7 +40,7 @@ namespace Crawler
                 case "titles":
                     ExtractTitles(args);
                     break;
-                case "songs":
+                case "lyrics":
                     ExtractLyrics(args);
                     break;
                 case "dataset":
@@ -259,8 +259,8 @@ namespace Crawler
             var p = new OptionSet() {
                 { "v|verbose=", "verbose level. 0: nothing, 1: macro infos, 2: micro infos", (int v) => verbose = v },
                 { "i|input=", "input folder containing titles/authors csv", folder => inputFolder = folder },
-                { "o|output=", "output folder to store lyrics - one file per song", folder => outputFolder= folder },
-                { "l|letters", $"songs starting letter, separated {Path.PathSeparator}.", l => letters.AddRange(l.Split(Path.PathSeparator)) },
+                { "o|output=", "output folder to store lyrics - one file per song", folder => outputFolder = folder },
+                { "l|letters=", $"songs starting letter, separated {Path.PathSeparator}.", l => letters.AddRange(l.Split(Path.PathSeparator)) },
                 { "p|proxies=",  "ouptut file to write available proxies",  proxies => proxiesFilename = proxies },
                 { "m|max-retry=", "set a limit number of retry to reach the website. Defaults to int.MaxValue", (int m) => maxRetry = m },
                 { "t|timeout=", "max time in ms before request timeout (default is 3000)", (int t) => timeout = t }
@@ -281,8 +281,9 @@ namespace Crawler
 
             if (verbose > 0)
             {
+                string msg = letters.Count == 0 ? "ALL" : string.Join(" ,", letters);
                 Console.WriteLine("starting lyrics extractions for songs starting with letters :\n" +
-                    $"\t- {string.Join(" ,", letters)}");
+                    $"\t- {msg}");
             }
 
             Parallel.ForEach(Utils.GetTitlesFilenames(letters, inputFolder, verbose), filename =>
@@ -340,8 +341,9 @@ namespace Crawler
 
             if (verbose > 0)
             {
+                string msg = letters.Count == 0 ? "ALL" : string.Join(" ,", letters);
                 Console.WriteLine("starting dataset creation for songs starting with letters :\n" +
-                    $"\t- {string.Join(" ,", letters)}");
+                    $"\t- {msg}");
             }
 
             var songCleaner = new SongTextCleaner();
@@ -432,7 +434,7 @@ namespace Crawler
             using (var writer = new StreamWriter(File.OpenWrite(outputFilename)))
             {
                 writer.Write($"# Authors/Titles Report, Date {DateTime.Now.ToLongDateString()}\n");
-                writer.Write($"Starting letter\tpage processed\tpages to process");
+                writer.Write($"Starting letter\tpage processed\tpages to process\n");
                 foreach (var l in letters)
                 {
                     if (results.ContainsKey(l))
@@ -496,7 +498,7 @@ namespace Crawler
             using (var writer = new StreamWriter(File.OpenWrite(outputFilename)))
             {
                 writer.Write($"# Authors/Titles Report, Date {DateTime.Now.ToLongDateString()}\n");
-                writer.Write($"Starting letter\tlyrics processed\tlyrics to process");
+                writer.Write($"Starting letter\tlyrics processed\tlyrics to process\n");
                 foreach (var l in letters)
                 {
                     writer.Write($"{l}\t{result[l].processed}\t{result[l].toProcess}\n");

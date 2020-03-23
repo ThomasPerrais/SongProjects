@@ -20,6 +20,6 @@ echo build Crawler solution
 dotnet build -c Release
 
 echo finding available proxies
-dotnet Crawler/bin/Release/netcoreapp3.1/Crawler.dll proxy -v 1 -f $files -o $output -u $urls -r 1
+dotnet Crawler/bin/Release/netcoreapp3.1/Crawler.dll proxy -v 1 -f $files -o $output -u $urls -r 3
 
 read -p "All done... Press [ENTER]."
